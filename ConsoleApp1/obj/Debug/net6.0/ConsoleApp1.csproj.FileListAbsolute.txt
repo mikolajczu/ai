@@ -1,0 +1,15 @@
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.csproj.AssemblyReference.cache
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.AssemblyInfoInputs.cache
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.AssemblyInfo.cs
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.csproj.CoreCompileInputs.cache
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/bin/Debug/net6.0/ConsoleApp1
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/bin/Debug/net6.0/ConsoleApp1.deps.json
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/bin/Debug/net6.0/ConsoleApp1.runtimeconfig.json
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/bin/Debug/net6.0/ConsoleApp1.dll
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/bin/Debug/net6.0/ConsoleApp1.pdb
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.dll
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/refint/ConsoleApp1.dll
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.pdb
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ConsoleApp1.genruntimeconfig.cache
+/home/mikey/Documents/Hobby/ai-classes/ConsoleApp1/obj/Debug/net6.0/ref/ConsoleApp1.dll
