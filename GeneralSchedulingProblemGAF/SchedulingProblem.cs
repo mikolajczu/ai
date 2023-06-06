@@ -28,6 +28,118 @@ public class SchedulingProblem
         }
     }
 
+    private int[] GenerateChromosome()
+    {
+        int[] chromosome = new int[jobs.Length];
+        for (int i = 0; i < jobs.Length; i++)
+        {
+            int processorIndex = random.Next(processors.Count);
+            chromosome[i] = processorIndex;
+        }
+        return chromosome;
+    }
+
+    private void EvaluateFitness()
+    {
+        foreach (var processor in processors)
+            processor.Jobs.Clear();
+
+        foreach (var chromosome in population)
+        {
+            for (int i = 0; i < chromosome.Length; i++)
+            {
+                int jobIndex = i;
+                int processorIndex = chromosome[i];
+                processors[processorIndex].Jobs.Add(jobs[jobIndex]);
+            }
+        }
+    }
+
+    private List<int[]> SelectElite(int eliteCount)
+    {
+        population.Sort((a, b) =>
+        {
+            int fitnessA = CalculateFitness(a);
+            int fitnessB = CalculateFitness(b);
+            return fitnessB.CompareTo(fitnessA);
+        });
+
+        return population.GetRange(0, eliteCount);
+    }
+
+    private int[] SelectParent()
+    {
+        int index = random.Next(population.Count);
+        return population[index];
+    }
+
+    private int[] Crossover(int[] parent1, int[] parent2)
+    {
+        int crossoverPoint = random.Next(1, parent1.Length - 1);
+        int[] child = new int[parent1.Length];
+
+        for (int i = 0; i < crossoverPoint; i++)
+        {
+            child[i] = parent1[i];
+        }
+
+        for (int i = crossoverPoint; i < parent2.Length; i++)
+        {
+            child[i] = parent2[i];
+        }
+
+        return child;
+    }
+
+    private int[] Mutate(int[] chromosome)
+    {
+        int mutationPoint = random.Next(0, chromosome.Length);
+        int newProcessorIndex = random.Next(processors.Count);
+        chromosome[mutationPoint] = newProcessorIndex;
+        return chromosome;
+    }
+
+    private int CalculateFitness(int[] chromosome)
+    {
+        EvaluateFitness();
+        int fitness = 0;
+        foreach (var processor in processors)
+        {
+            int processorWeight = processor.Weight(jobs);
+            if (processorWeight > fitness)
+                fitness = processorWeight;
+        }
+        return fitness;
+    }
+
+    private void SelectBestChromosome()
+    {
+        int bestFitness = 0;
+        int[] bestChromosome = null;
+
+        foreach (var chromosome in population)
+        {
+            int fitness = CalculateFitness(chromosome);
+            if (fitness > bestFitness)
+            {
+                bestFitness = fitness;
+                bestChromosome = chromosome;
+            }
+        }
+
+        foreach (var processor in processors)
+            processor.Jobs.Clear();
+
+        for (int i = 0; i < bestChromosome.Length; i++)
+        {
+            int jobIndex = i;
+            int processorIndex = bestChromosome[i];
+            processors[processorIndex].Jobs.Add(jobs[jobIndex]);
+        }
+
+        totalWeight = bestFitness;
+    }
+
     public void ScheduleJobs()
     {
         // Genetic Algorithm Parameters
@@ -37,8 +149,6 @@ public class SchedulingProblem
 
         for (var generation = 0; generation < generations; generation++)
         {
-            EvaluateFitness();
-
             var newPopulation = new List<int[]>();
 
             var eliteCount = (int)Math.Ceiling(population.Count * eliteRate);
@@ -68,118 +178,7 @@ public class SchedulingProblem
         for (var i = 0; i < processors.Count; i++)
         {
             Console.WriteLine($"Processor {i + 1}: {string.Join(", ", processors[i].Jobs.Select(j => jobs[j]))}");
-            if (totalWeight < processors[i].Weight(jobs))
-                totalWeight = processors[i].Weight(jobs);
         }
         Console.WriteLine($"Total Weight: {totalWeight}");
-    }
-
-    private void EvaluateFitness()
-    {
-        foreach (var chromosome in population)
-        {
-            InitializeProcessors();
-
-            var jobIndex = 0;
-            foreach (var gene in chromosome)
-            {
-                var processor = jobIndex % processors.Count;
-                processors[processor].Jobs.Add(gene);
-                jobIndex++;
-            }
-
-            var currentWeight = processors.Max(p => p.Weight(jobs));
-            if (currentWeight > totalWeight)
-                totalWeight = currentWeight;
-        }
-    }
-
-
-    private void InitializeProcessors()
-    {
-        foreach (var processor in processors)
-            processor.Jobs.Clear();
-    }
-
-    private int[] GenerateChromosome()
-    {
-        var chromosome = Enumerable.Range(0, jobs.Length).ToArray();
-        Shuffle(chromosome);
-        return chromosome;
-    }
-
-    private void Shuffle<T>(T[] array)
-    {
-        var n = array.Length;
-        while (n > 1)
-        {
-            var k = random.Next(n--);
-            var temp = array[n];
-            array[n] = array[k];
-            array[k] = temp;
-        }
-    }
-
-    private int[] SelectParent()
-    {
-        var parent1 = population[random.Next(population.Count)];
-        var parent2 = population[random.Next(population.Count)];
-        return CalculateFitness(parent1) > CalculateFitness(parent2) ? parent1 : parent2;
-    }
-
-    private double CalculateFitness(int[] chromosome)
-    {
-        InitializeProcessors();
-
-        for (var i = 0; i < chromosome.Length; i++)
-        {
-            var processor = i % processors.Count;
-            processors[processor].Jobs.Add(chromosome[i]);
-        }
-
-        return processors.Max(p => p.Weight(jobs));
-    }
-
-    private List<int[]> SelectElite(int eliteCount)
-    {
-        var sortedPopulation = population.OrderByDescending(chromosome => CalculateFitness(chromosome)).ToList();
-        return sortedPopulation.GetRange(0, eliteCount);
-    }
-
-    private int[] Crossover(int[] parent1, int[] parent2)
-    {
-        var crossoverPoint = random.Next(1, jobs.Length - 1);
-        var offspring = new int[jobs.Length];
-
-        Array.Copy(parent1, offspring, crossoverPoint);
-
-        var remainingJobs = parent2.Where(job => !offspring.Contains(job)).ToArray();
-        Array.Copy(remainingJobs, 0, offspring, crossoverPoint, remainingJobs.Length);
-
-        return offspring;
-    }
-
-    private int[] Mutate(int[] chromosome)
-    {
-        var index1 = random.Next(jobs.Length);
-        var index2 = random.Next(jobs.Length);
-
-        var temp = chromosome[index1];
-        chromosome[index1] = chromosome[index2];
-        chromosome[index2] = temp;
-
-        return chromosome;
-    }
-
-    private void SelectBestChromosome()
-    {
-        var bestChromosome = population.OrderByDescending(chromosome => CalculateFitness(chromosome)).First();
-        InitializeProcessors();
-
-        for (var i = 0; i < bestChromosome.Length; i++)
-        {
-            var processor = i % processors.Count;
-            processors[processor].Jobs.Add(bestChromosome[i]);
-        }
     }
 }
