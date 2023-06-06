@@ -1,0 +1,15 @@
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/bin/Debug/net6.0/GeneralSchedulingProblemSA
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/bin/Debug/net6.0/GeneralSchedulingProblemSA.deps.json
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/bin/Debug/net6.0/GeneralSchedulingProblemSA.runtimeconfig.json
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/bin/Debug/net6.0/GeneralSchedulingProblemSA.dll
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/bin/Debug/net6.0/GeneralSchedulingProblemSA.pdb
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.csproj.AssemblyReference.cache
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.GeneratedMSBuildEditorConfig.editorconfig
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.AssemblyInfoInputs.cache
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.AssemblyInfo.cs
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.csproj.CoreCompileInputs.cache
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.dll
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/refint/GeneralSchedulingProblemSA.dll
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.pdb
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/GeneralSchedulingProblemSA.genruntimeconfig.cache
+/home/mikey/Documents/Hobby/ai-classes/GeneralSchedulingProblemSA/obj/Debug/net6.0/ref/GeneralSchedulingProblemSA.dll
